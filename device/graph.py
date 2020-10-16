@@ -1,6 +1,4 @@
 # Program Name: graph.py
-# Purpose: 
-# Coder: Ramon Gnan Garcia - 0926596
 # Date: Jan 13, 2020
 
 import matplotlib.pyplot as plt

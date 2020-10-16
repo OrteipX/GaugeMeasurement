@@ -1,6 +1,4 @@
 # Program Name: serial_interface.py
-# Purpose: provides a serial connection with read/write
-# Coder: Ramon Gnan Garcia
 # Date: Jan 21, 2020
 
 import serial

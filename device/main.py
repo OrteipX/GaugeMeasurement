@@ -1,6 +1,4 @@
 # Program Name: main.py
-# Purpose: 
-# Coder: Ramon Gnan Garcia - 0926596
 # Date: May 18, 2020
 
 from serial_interface import *

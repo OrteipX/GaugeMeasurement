@@ -1,6 +1,4 @@
 # Program Name: calculations.py
-# Purpose: 
-# Coder: Ramon Gnan Garcia - 0926596
 # Date: Mar 09, 2020
 
 class Calculations:
