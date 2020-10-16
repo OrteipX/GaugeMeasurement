@@ -3,8 +3,7 @@
 The gauge measurement device is a project which consists of a Mitutoyo Gauge working alongside to a step motor that is going to collect dimension for the analyzed part.
 
 ## Before usage
-Use the package manager pip to 
-install matplotlib.
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install matplotlib.
 ```
 pip install matplotlib
 ```
