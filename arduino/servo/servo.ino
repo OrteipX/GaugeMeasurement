@@ -23,7 +23,7 @@ const char COMMAND_02[] = {"RotateClockwise"};
 const char COMMAND_03[] = {"RotateCounterClockwise"};
 const char COMMAND_04[] = {"GetAngle"};
 const unsigned short BAUDRATE = 57600;
-const unsigned short INITIAL_ANGLE = 0; // before = 2 // before(working) = 10
+const unsigned short INITIAL_ANGLE = 0;
 const unsigned short FINAL_ANGLE = 175;
 const unsigned short SERVO_PIN = 9;
 const unsigned short MAX_INPUT  = 128;
@@ -91,7 +91,6 @@ short getAngle()
 void rotateServo(short angle)
 {
     servo.write(angle);
-    //delay(SERVO_SPEED);
 }
 
 void resetServo(int currentAngle)
