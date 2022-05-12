@@ -2,15 +2,15 @@
 # Date: Jan 21, 2020
 
 import serial
-import time
 from enum import Enum
 from collections import deque
-from time import sleep
+
 
 class ErrorCode(Enum):
     NoError = 1
     TryAgain = 2
     FatalError = 3
+
 
 class SerialInterface:
 
@@ -19,42 +19,35 @@ class SerialInterface:
     __try_again = 0
     __command_len = 0
 
-    def __init__(self, port, baudrate = 57600, timeout = 0.5):
+    def __init__(self, port, baudrate=57600, timeout=0.5):
         self.__port = port
         self.__baudrate = baudrate
         self.__timeout = timeout
         self.__ser_conn = serial.Serial()
 
-
     @property
     def port(self):
         return self.__port
-
 
     @port.setter
     def set_port(self, value):
         self.__port = value
 
-
     @property
     def baudrate(self):
         return self.__baudrate
-
 
     @baudrate.setter
     def set_baudrate(self, value):
         self.__baudrate = value
 
-
     @property
     def timeout(self):
         return self.__timeout
 
-
     @timeout.setter
     def set_timeout(self, value):
         self.__timeout = value
-
 
     def connect(self):
         self.__ser_conn.port = self.__port
@@ -72,14 +65,12 @@ class SerialInterface:
             print("Error open serial port: {}\n".format(str(e)))
             exit()
 
-
     def __del__(self):
         self.__ser_conn.close()
         if not self.__ser_conn.is_open:
             print("Serial disconnected...\n")
 
-
-    def remove_left_zeros(self, response = deque()):
+    def remove_left_zeros(self, response=deque()):
         if len(response) > 0:
             while True:
                 if response[0] != str(0):
@@ -88,7 +79,6 @@ class SerialInterface:
                 response.popleft()
 
         return response
-
 
     def copy_and_advance_buffer(self):
         response = deque(self.__ser_buf)
@@ -105,7 +95,6 @@ class SerialInterface:
 
         return str().join(response)
 
-
     def parse_buffer(self):
         if len(self.__ser_buf) < self.__command_len:
             return ErrorCode.TryAgain, 0
@@ -117,15 +106,12 @@ class SerialInterface:
 
         return ErrorCode.NoError, self.copy_and_advance_buffer()
 
-
     def read_from_serial(self):
         serial_read = self.__ser_conn.read(128)
 
         return serial_read
 
-
     def read_response(self):
-
         bytes_read = self.read_from_serial()
 
         if len(bytes_read) < 0:
@@ -137,7 +123,6 @@ class SerialInterface:
             self.__ser_buf.append(ser)
 
         return self.parse_buffer()
-
 
     def send_request(self, command):
         self.__ser_conn.write(str.encode(command))

@@ -1,19 +1,21 @@
 # Program Name: main.py
 # Date: May 18, 2020
 
-from serial_interface import *
+from serial_interface import SerialInterface
 from calculations import Calculations
 from graph import Graph
-from collections import deque
+
 
 def main():
-    ser_arduino = SerialInterface(port = "COM9")
-    ser_arduino.connect()
-    ser_gauge = SerialInterface(port = "COM10", baudrate = 9600)
-    ser_gauge.connect()
+    try:
+        ser_arduino = SerialInterface(port="COM9")
+        ser_arduino.connect()
+        ser_gauge = SerialInterface(port="COM10", baudrate=9600)
+        ser_gauge.connect()
+    except Exception as e:
+        print(e)
 
     g_command = "1\r"
-    boltNum = 1
     gr = Graph()
     calc = Calculations()
 
@@ -61,7 +63,7 @@ def main():
 
             response_list = calc.normalize_dimensions(response_list)
 
-            if calc.check_dimensions(response_list, max_dim, min_dim) == True:
+            if calc.check_dimensions(response_list, max_dim, min_dim):
                 print("#### REPROVADO ####\n")
                 gr.set_title = "Lingueta LW2H"
                 gr.set_y_values = response_list
@@ -72,4 +74,6 @@ def main():
         elif user_input == 2:
             ser_arduino.send_request("ResetServo\n")
 
-main()
+
+if __name__ == "__main__":
+    main()
